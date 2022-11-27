@@ -22,7 +22,7 @@ import WavyText from 'components/UI/WavyText';
 import ScrollToBottomBtn from '../UI/ScrollToBottomBtn';
 
 const Particles = dynamic(() => import('components/UI/Particles'));
-const Avatar = dynamic(() => import('components/HomePage/Hero/MyPicture'), { ssr: false });
+const Avatar = dynamic(() => import('components/HomePage/Hero/MyPicture'));
 
 const Hero: React.FC = () => {
     const [showDesc, setShowDesc] = useBoolean();
@@ -40,10 +40,8 @@ const Hero: React.FC = () => {
             pos='relative'
             justify='center'
             align='center'
-            h='calc(100vh)'
-            as={motion.section}
-            initial={{ opacity: 0, y: 200 }}
-            animate={{ opacity: 1, y: 0 }}
+            minH='calc(100vh)'
+            as='section'
             color='black'
         >
             <Flex

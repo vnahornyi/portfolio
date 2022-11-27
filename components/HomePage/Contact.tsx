@@ -121,27 +121,39 @@ const Contact: React.FC = () => {
                                             variant='ghost'
                                             size='lg'
                                             isRound={true}
+                                            href='https://github.com/vnahornyi'
+                                            as='a'
+                                            target='_blank'
+                                            rel='noreferrer noopener'
                                             icon={<BsGithub size='28px' />}
                                         />
                                         <IconButton
-                                            aria-label='github'
+                                            aria-label='instagram'
                                             variant='ghost'
                                             size='lg'
                                             isRound={true}
+                                            href='https://www.instagram.com/vlad.nahornyi/'
+                                            as='a'
+                                            target='_blank'
+                                            rel='noreferrer noopener'
                                             icon={<BsInstagram size='28px' />}
                                         />
                                         <IconButton
-                                            aria-label='github'
+                                            aria-label='discord'
                                             variant='ghost'
                                             size='lg'
                                             isRound={true}
+                                            as='a'
+                                            href='https://discordapp.com/users/557977593500925953'
+                                            target='_blank'
+                                            rel='noreferrer noopener'
                                             icon={<BsDiscord size='28px' />}
                                         />
                                     </HStack>
                                 </Box>
                             </WrapItem>
                             <WrapItem w='full'>
-                                <Box bg='white' w='full' borderRadius='lg'>
+                                <Box bg='white' w='full' borderRadius='lg' dropShadow='2xl'>
                                     <Box m={8} color='#0B0E3F'>
                                         <VStack spacing={5}>
                                             <FormControl id='name'>

@@ -24,6 +24,7 @@
         "react-dom": "18.2.0",
         "react-icons": "^4.6.0",
         "react-tsparticles": "^2.5.3",
+        "sharp": "^0.31.2",
         "tsparticles": "^2.5.3"
     },
     "devDependencies": {
