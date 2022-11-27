@@ -24,7 +24,7 @@ const Header = () => {
             display='flex'
             justifyContent='center'
             style={{ backdropFilter: backgropBlur }}
-            zIndex={2}
+            zIndex={5}
             pos='fixed'
             w='full'
             top='0'

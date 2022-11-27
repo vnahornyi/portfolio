@@ -27,7 +27,7 @@ const About: React.FC = () => {
             bg={useColorModeValue('green.50', 'gray.900')}
             overflow='hidden'
             display='flex'
-            zIndex={1}
+            zIndex={3}
             justifyContent='center'
             alignItems='center'
         >

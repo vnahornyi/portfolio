@@ -23,7 +23,8 @@ const Blog: React.FC = () => {
             minH='calc(100vh + 20px)'
             overflow='hidden'
             bg={useColorModeValue('green.50', 'gray.900')}
-            py={{ base: '16', lg: '20' }}
+            py='20'
+            pt={{ base: '28', md: '44', lg: '52' }}
             px={{ base: '5', lg: '0' }}
             zIndex={1}
         >
