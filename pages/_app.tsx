@@ -1,13 +1,7 @@
 import { AppProps } from 'next/app';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import MainLayout from 'layouts/MainLayout';
-
-export const theme = extendTheme({
-    fonts: {
-        body: `'Quicksand', sans-serif`,
-        heading: `'Quicksand', sans-serif`,
-    }
-});
+import theme from 'constants/theme';
 
 const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
     return (

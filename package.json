@@ -6,20 +6,25 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev -H 192.168.1.101",
+        "dev": "next dev",
         "build": "next build",
-        "start": "next start -H 192.168.1.101",
+        "start": "next start",
         "lint": "next lint",
         "prettier": "prettier -write ."
     },
     "dependencies": {
+        "@chakra-ui/icons": "^2.0.12",
         "@chakra-ui/react": "^2.4.1",
+        "@chakra-ui/react-use-size": "^2.0.5",
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
         "framer-motion": "^7.6.8",
         "next": "13.0.4",
         "react": "18.2.0",
-        "react-dom": "18.2.0"
+        "react-dom": "18.2.0",
+        "react-icons": "^4.6.0",
+        "react-tsparticles": "^2.5.3",
+        "tsparticles": "^2.5.3"
     },
     "devDependencies": {
         "@types/node": "18.11.9",
