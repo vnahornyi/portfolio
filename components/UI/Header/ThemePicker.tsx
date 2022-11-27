@@ -10,6 +10,7 @@ const ThemePicker = () => {
             aria-label='toggle theme'
             bg='transparent'
             onClick={toggleColorMode}
+            size={{ base: 'sm', md: 'md' }}
             icon={<Icon w={5} h={5} />}
         />
     );

@@ -13,6 +13,7 @@ import {
     InputLeftElement,
     Text,
     Textarea,
+    useBreakpointValue,
     useColorModeValue,
     VStack,
     Wrap,
@@ -35,6 +36,7 @@ const Contact: React.FC = () => {
             pos='relative'
             minH='calc(100vh)'
             mt='0'
+            p='4'
             display='flex'
             justifyContent='center'
             alignItems='center'
@@ -138,8 +140,8 @@ const Contact: React.FC = () => {
                                     </HStack>
                                 </Box>
                             </WrapItem>
-                            <WrapItem>
-                                <Box bg='white' borderRadius='lg'>
+                            <WrapItem w='full'>
+                                <Box bg='white' w='full' borderRadius='lg'>
                                     <Box m={8} color='#0B0E3F'>
                                         <VStack spacing={5}>
                                             <FormControl id='name'>
@@ -196,7 +198,11 @@ const Contact: React.FC = () => {
                     </Box>
                 </Box>
             </Flex>
-            <BigTitle bottom='-4.5vw' right='50%' text='CONTACT' />
+            <BigTitle
+                bottom={useBreakpointValue({ base: '-20px', lg: '0' })}
+                right={useBreakpointValue({ base: '5%', lg: '50%' })}
+                text='CONTACT'
+            />
             <Particles config={contactConfig} />
         </Container>
     );

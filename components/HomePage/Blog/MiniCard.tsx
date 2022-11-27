@@ -31,7 +31,7 @@ const MiniCard: React.FC<IMiniCardProps> = ({ title, description, slug, delay })
     return (
         <Card
             ref={ref}
-            maxW='sm'
+            maxW={{ base: 'sm', md: 'xs', lg: 'sm' }}
             w='full'
             opacity={isInView ? 1 : 0}
             transform={isInView ? 'none' : 'translateY(150px)'}

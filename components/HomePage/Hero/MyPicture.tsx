@@ -13,8 +13,9 @@ const MyPicture: React.FC = () => {
 
     return (
         <MotionAvatar
-            w='250px'
-            h='250px'
+            mt={{ base: 10, lg: 0 }}
+            w={{ base: '200px', md: '250px' }}
+            h={{ base: '200px', md: '250px' }}
             style={{ x: animateX, rotate: animateX }}
         >
             <Avatar

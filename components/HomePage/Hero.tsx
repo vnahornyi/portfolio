@@ -46,7 +46,15 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             color='black'
         >
-            <Flex justify='space-between' align='center' maxW='container.lg' w='full' zIndex={1}>
+            <Flex
+                justify={{ base: 'space-evenly', xl: 'space-between' }}
+                align='center'
+                maxW='container.lg'
+                w='full'
+                zIndex={1}
+                p='4'
+                direction={{ base: 'column', lg: 'row' }}
+            >
                 <Stack direction='column' spacing='4'>
                     <WavyText
                         text={`Hi, I'm Vladyslav Nahornyi`}
@@ -61,16 +69,21 @@ const Hero: React.FC = () => {
                                 variants={description}
                                 initial='hidden'
                                 animate='show'
-                                spacing={10}
+                                spacing={{ base: 4, lg: 10 }}
                             >
                                 <Text
-                                    fontSize='xl'
+                                    fontSize={{ base: 'sm', md: 'xl' }}
                                     fontWeight='bold'
                                     color='green.400'
                                 >
                                     Front-end Developer based in Ukraine
                                 </Text>
-                                <Button colorScheme='green' variant='outline' onClick={handleScrollToContact}>
+                                <Button
+                                    colorScheme='green'
+                                    variant='outline'
+                                    onClick={handleScrollToContact}
+                                    size={{ base: 'sm', md: 'md' }}
+                                >
                                     Contact me!
                                 </Button>
                             </Stack>

@@ -51,6 +51,7 @@ const WavyText: React.FC<IWavyTextProps> = ({
         <Heading
             as={motion.h1}
             variant='h1'
+            fontSize={{ base: 'xl', md: '3xl' }}
             display='flex'
             overflow='hidden'
             initial='hidden'

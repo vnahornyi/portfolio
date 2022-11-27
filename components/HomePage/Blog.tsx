@@ -1,4 +1,10 @@
-import { Box, Flex, Link, useColorModeValue } from '@chakra-ui/react';
+import {
+    Box,
+    Flex,
+    Link,
+    useBreakpointValue,
+    useColorModeValue,
+} from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import NextLink from 'next/link';
 
@@ -17,7 +23,8 @@ const Blog: React.FC = () => {
             minH='calc(100vh + 20px)'
             overflow='hidden'
             bg={useColorModeValue('green.50', 'gray.900')}
-            py='20'
+            py={{ base: '16', lg: '20' }}
+            px={{ base: '5', lg: '0' }}
             zIndex={1}
         >
             <Flex
@@ -25,8 +32,9 @@ const Blog: React.FC = () => {
                 w='full'
                 h='auto'
                 as={motion.div}
+                justify='center'
                 wrap='wrap'
-                gap='16'
+                gap={{ base: 5, lg: 16 }}
                 zIndex={1}
             >
                 {new Array(9).fill(0).map((_, idx) => (
@@ -39,18 +47,17 @@ const Blog: React.FC = () => {
                     />
                 ))}
             </Flex>
-            <Link
-                as={NextLink}
-                href='/blog'
-                mt='16'
-                fontWeight='bold'
-            >
+            <Link as={NextLink} href='/blog' mt='16' fontWeight='bold'>
                 See more...
             </Link>
             <Box pt='5'>
                 <ScrollToBottomBtn sectionNumber={2} alwaysWhite />
             </Box>
-            <BigTitle top='-4.5vw' left='50%' text='BLOG' />
+            <BigTitle
+                top={useBreakpointValue({ base: '-20px', lg: '0' })}
+                left={useBreakpointValue({ base: '5%', lg: '50%' })}
+                text='BLOG'
+            />
         </Flex>
     );
 };

@@ -67,7 +67,7 @@ const ParalaxText: React.FC<IParalaxTextProps> = ({
                 mx='auto'
                 fontWeight='600'
                 textTransform='uppercase'
-                fontSize='64px'
+                fontSize={{ base: '32px', md: '64px' }}
                 style={{ x }}
             >
                 {words.map((word, idx) => (

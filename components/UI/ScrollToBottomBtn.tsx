@@ -9,10 +9,12 @@ interface IScrollToBottomBtn {
 
 const ScrollToBottomBtn: React.FC<IScrollToBottomBtn> = ({ sectionNumber = 1, alwaysWhite }) => {
     const handleClick = () => {
-        window.scrollTo({
-            top: window.innerHeight * sectionNumber,
-            behavior: 'smooth'
-        });
+        const _sectionNumber = sectionNumber;
+        // FIXME: scroll to section
+        // window.scrollTo({
+        //     top: window.innerHeight * sectionNumber,
+        //     behavior: 'smooth'
+        // });
     }
 
     return (

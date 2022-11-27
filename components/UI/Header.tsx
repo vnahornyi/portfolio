@@ -11,7 +11,7 @@ const Header = () => {
     const backgropBlur = useTransform(
         scrollY,
         [0, 40],
-        ['blur(0px)', 'blur(8px)']
+        ['blur(0px) contrast(100%)', 'blur(8px) contrast(90%)']
     );
 
     const handleOpenResume = () => {
@@ -34,13 +34,13 @@ const Header = () => {
                 w='full'
                 align='center'
                 justify='space-between'
-                px='2'
+                px='5'
                 py='4'
             >
                 <Text
                     as={Link}
                     href='/'
-                    fontSize='xl'
+                    fontSize={{ base: 'md', md: 'xl' }}
                     fontWeight='bold'
                 >
                     Vladyslav Nahornyi
@@ -53,6 +53,7 @@ const Header = () => {
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.8 }}
                         onClick={handleOpenResume}
+                        size={{ base: 'sm', md: 'md' }}
                     >
                         RESUME
                     </Button>
