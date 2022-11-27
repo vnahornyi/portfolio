@@ -6,6 +6,7 @@ import {
     Link,
     Stack,
     Text,
+    useBreakpointValue,
     useColorModeValue
 } from '@chakra-ui/react';
 import { useInView } from 'framer-motion';
@@ -21,6 +22,7 @@ interface IMiniCardProps {
 const MiniCard: React.FC<IMiniCardProps> = ({ title, description, slug, delay }) => {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true });
+    const customDelay = useBreakpointValue({ base: 0, lg: delay })
 
     const handleOpenLink: React.MouseEventHandler = (event) => {
         event?.preventDefault();
@@ -35,7 +37,7 @@ const MiniCard: React.FC<IMiniCardProps> = ({ title, description, slug, delay })
             w='full'
             opacity={isInView ? 1 : 0}
             transform={isInView ? 'none' : 'translateY(150px)'}
-            transition={`all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) ${0.3 * (delay ?? 0)}s`}
+            transition={`all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) ${0.3 * (customDelay ?? 0)}s`}
             bg={useColorModeValue('white', 'gray.800')}
         >
             <CardHeader>

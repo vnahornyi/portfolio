@@ -50,7 +50,7 @@ const About: React.FC = () => {
                     fontSize={{ base: 'md', md: 'lg' }}
                     opacity={isInView ? 1 : 0}
                     transform={isInView ? 'none' : 'translateX(-250px)'}
-                    transition='all 1s 1s'
+                    transition='all 1s 0.5s'
                 >
                     I&apos;m a front-end developer located in Ukraine. I love to
                     create complex SPA and beautiful web applications with great
@@ -60,7 +60,7 @@ const About: React.FC = () => {
                     fontSize={{ base: 'md', md: 'lg' }}
                     opacity={isInView ? 1 : 0}
                     transform={isInView ? 'none' : 'translateX(-250px)'}
-                    transition='all 1s 2s'
+                    transition='all 1s 1s'
                 >
                     My hobby is always to learn something new, whether it is
                     some new technology in it or something far from my kind of
@@ -70,7 +70,7 @@ const About: React.FC = () => {
                     fontSize={{ base: 'md', md: 'lg' }}
                     opacity={isInView ? 1 : 0}
                     transform={isInView ? 'none' : 'translateX(-250px)'}
-                    transition='all 1s 3s'
+                    transition='all 1s 1.5s'
                 >
                     In my spare time I study to prepare different new dishes,
                     which have not yet prepared, walking and spending time with
@@ -80,7 +80,7 @@ const About: React.FC = () => {
                     fontSize={{ base: 'md', md: 'lg' }}
                     opacity={isInView ? 1 : 0}
                     transform={isInView ? 'none' : 'translateX(-250px)'}
-                    transition='all 1s 4s'
+                    transition='all 1s 2s'
                 >
                     I&apos;m interested in the whole frontend stack Like trying
                     new things and building great projects.

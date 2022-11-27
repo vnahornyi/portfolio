@@ -59,7 +59,7 @@ const Skills = () => {
                     fontSize={{ base: 'md', md: 'lg' }}
                     opacity={isInView ? 1 : 0}
                     transform={isInView ? 'none' : 'translateY(200px)'}
-                    transition='all 1s 1s'
+                    transition='all 1s 0.5s'
                 >
                     Strong professional skills in Front-end developing. Have
                     experience with bootstrapping front-end from zero on React,
@@ -69,7 +69,7 @@ const Skills = () => {
                     fontSize={{ base: 'md', md: 'lg' }}
                     opacity={isInView ? 1 : 0}
                     transform={isInView ? 'none' : 'translateY(200px)'}
-                    transition='all 1s 2s'
+                    transition='all 1s 1s'
                 >
                     Bootstrapping layouts with Tailwind CSS or ChakraUl and
                     customizing them. Adaptive site design. Work as HTML5
@@ -80,7 +80,7 @@ const Skills = () => {
                     fontSize={{ base: 'md', md: 'lg' }}
                     opacity={isInView ? 1 : 0}
                     transform={isInView ? 'none' : 'translateY(200px)'}
-                    transition='all 1s 3s'
+                    transition='all 1s 1.5s'
                 >
                     My constant goal is to understand the client&apos;s business
                     requirements and produce a maintainable code of high
