@@ -52,7 +52,7 @@ const MiniCard: React.FC<IMiniCardProps> = ({
                     <Text>{description}</Text>
                     <Link
                         as={NextLink}
-                        href={`/post/${slug}`}
+                        href={`/blog/${slug}`}
                         color={useColorModeValue('green.400', 'white')}
                         fontWeight='bold'
                     >

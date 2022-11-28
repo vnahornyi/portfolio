@@ -18,6 +18,8 @@ interface IBlogProps {
 }
 
 const Blog: React.FC<IBlogProps> = ({ posts }) => {
+    if (!posts.length) return null;
+    
     return (
         <Flex
             direction='column'

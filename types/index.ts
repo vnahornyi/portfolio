@@ -14,6 +14,12 @@ export interface IPortableElement {
 
 export interface IPost {
     body?: IPortableElement[];
+    mainImage?: {
+        src: string;
+        width: number;
+        height: number;
+        placeholder: string;
+    };
     categories: string[];
     created: string;
     description: string;

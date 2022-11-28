@@ -13,8 +13,10 @@ import {
     InputLeftElement,
     Text,
     Textarea,
+    useBoolean,
     useBreakpointValue,
     useColorModeValue,
+    useToast,
     VStack,
     Wrap,
     WrapItem,
@@ -23,13 +25,58 @@ import {
 import { MdPhone, MdEmail, MdLocationOn, MdOutlineEmail } from 'react-icons/md';
 import { BsGithub, BsInstagram, BsDiscord, BsPerson } from 'react-icons/bs';
 import dynamic from 'next/dynamic';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 
 import contactConfig from 'public/data/contact-particles.json';
 import BigTitle from 'components/UI/BigTitle';
 
 const Particles = dynamic(() => import('components/UI/Particles'));
 
+interface IContactForm {
+    name: string;
+    email: string;
+    message: string;
+}
+
 const Contact: React.FC = () => {
+    const { control, handleSubmit, reset } = useForm<IContactForm>();
+    const [isLoading, setLoading] = useBoolean();
+    const toast = useToast({ position: 'bottom-right' });
+
+    const onSubmit: SubmitHandler<IContactForm> = async (data) => {
+        setLoading.on();
+
+        try {
+            const response = await fetch('/api/message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const { created } = await response.json();
+
+            if (!created) throw new Error();
+
+            toast({
+                title: 'Message sent',
+                description: 'I will be with you within 2 days',
+                status: 'success',
+                duration: 3000,
+                isClosable: false
+            });
+            reset({ name: '', email: '', message: '' });
+        } catch {
+            toast({
+                title: 'Error',
+                description: 'Error sending message. Try again',
+                status: 'error',
+                duration: 3000,
+                isClosable: true
+            })
+        } finally {
+            setLoading.off();
+        }
+    };
+
     return (
         <Container
             maxW='full'
@@ -153,51 +200,78 @@ const Contact: React.FC = () => {
                                 </Box>
                             </WrapItem>
                             <WrapItem w='full'>
-                                <Box bg='white' w='full' borderRadius='lg' dropShadow='2xl'>
+                                <Box
+                                    bg='white'
+                                    w='full'
+                                    borderRadius='lg'
+                                    dropShadow='2xl'
+                                    as='form'
+                                    onSubmit={handleSubmit(onSubmit)}
+                                >
                                     <Box m={8} color='#0B0E3F'>
                                         <VStack spacing={5}>
-                                            <FormControl id='name'>
-                                                <FormLabel>Your Name</FormLabel>
-                                                <InputGroup borderColor='#E0E1E7'>
-                                                    <InputLeftElement pointerEvents='none'>
-                                                        <BsPerson color='gray.800' />
-                                                    </InputLeftElement>
-                                                    <Input
-                                                        type='text'
-                                                        size='md'
+                                            <Controller
+                                                name='name'
+                                                control={control}
+                                                render={({ field }) => (
+                                                    <FormControl isRequired>
+                                                        <FormLabel>Your Name</FormLabel>
+                                                        <InputGroup borderColor='#E0E1E7'>
+                                                            <InputLeftElement pointerEvents='none'>
+                                                                <BsPerson color='gray.800' />
+                                                            </InputLeftElement>
+                                                            <Input
+                                                                type='text'
+                                                                size='md'
+                                                                {...field}
+                                                            />
+                                                        </InputGroup>
+                                                    </FormControl>
+                                                )}
+                                            />
+                                            <Controller
+                                                name='email'
+                                                control={control}
+                                                render={({ field }) => (
+                                                    <FormControl isRequired>
+                                                        <FormLabel>Mail</FormLabel>
+                                                        <InputGroup borderColor='#E0E1E7'>
+                                                            <InputLeftElement pointerEvents='none'>
+                                                                <MdOutlineEmail color='gray.800' />
+                                                            </InputLeftElement>
+                                                            <Input
+                                                                type='email'
+                                                                size='md'
+                                                                {...field}
+                                                            />
+                                                        </InputGroup>
+                                                    </FormControl>
+                                                )}
+                                            />
+                                            <Controller
+                                                name='message'
+                                                control={control}
+                                                render={({ field }) => (
+                                                    <FormControl isRequired>
+                                                    <FormLabel>Message</FormLabel>
+                                                    <Textarea
+                                                        borderColor='gray.300'
+                                                        {...field}
+                                                        _hover={{
+                                                            borderRadius:
+                                                                'gray.300',
+                                                        }}
+                                                        placeholder='message'
                                                     />
-                                                </InputGroup>
-                                            </FormControl>
-                                            <FormControl id='email'>
-                                                <FormLabel>Mail</FormLabel>
-                                                <InputGroup borderColor='#E0E1E7'>
-                                                    <InputLeftElement pointerEvents='none'>
-                                                        <MdOutlineEmail color='gray.800' />
-                                                    </InputLeftElement>
-                                                    <Input
-                                                        type='text'
-                                                        size='md'
-                                                    />
-                                                </InputGroup>
-                                            </FormControl>
-                                            <FormControl id='message'>
-                                                <FormLabel>Message</FormLabel>
-                                                <Textarea
-                                                    borderColor='gray.300'
-                                                    _hover={{
-                                                        borderRadius:
-                                                            'gray.300',
-                                                    }}
-                                                    placeholder='message'
-                                                />
-                                            </FormControl>
-                                            <FormControl
-                                                id='name'
-                                                float='right'
-                                            >
+                                                    </FormControl>
+                                                )}
+                                            />
+                                            <FormControl float='right'>
                                                 <Button
                                                     variant='solid'
                                                     colorScheme='green'
+                                                    type='submit'
+                                                    isLoading={isLoading}
                                                 >
                                                     Send Message
                                                 </Button>

@@ -36,6 +36,7 @@ export default {
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
+          {title: 'Code', value: 'code'},
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -53,6 +54,9 @@ export default {
           },
         ],
       },
+    },
+    {
+      type: 'code',
     },
     // You can add additional types here. Note that you can't use
     // primitive types such as 'string' and 'number' in the same array
