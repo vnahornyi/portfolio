@@ -1,8 +1,10 @@
 import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
+
 import MainLayout from 'layouts/MainLayout';
 import theme from 'constants/theme';
-import { useEffect } from 'react';
 
 const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
     useEffect(() => {
@@ -20,6 +22,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
             <MainLayout>
                 <Component {...pageProps} key={router.route} />
             </MainLayout>
+            <Analytics />
         </ChakraProvider>
     );
 };
