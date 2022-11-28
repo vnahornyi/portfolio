@@ -8,16 +8,26 @@ import {
 } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
-import { useInView } from 'framer-motion';
+import { useInView, motion } from 'framer-motion';
+import { PortableText } from '@portabletext/react';
+
+import { IPage } from 'types';
 
 import BigTitle from 'components/UI/BigTitle';
-import ScrollToBottomBtn from 'components/UI/ScrollToBottomBtn';
+import JumpingArrow from 'components/UI/JumpingArrow';
 
 const ParalaxText = dynamic(() => import('components/UI/ParalaxText'), {
     ssr: false,
 });
 
-const Skills = () => {
+interface ISkillsProps extends IPage {
+    skillsLines: {
+        first: string[];
+        second: string[];
+    }
+}
+
+const Skills: React.FC<ISkillsProps> = ({ title, body, skillsLines }) => {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true });
 
@@ -53,77 +63,31 @@ const Skills = () => {
                     transform={isInView ? 'none' : 'translateY(200px)'}
                     transition='all 1s'
                 >
-                    Front-end Developer
+                    {title}
                 </Heading>
-                <Text
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    opacity={isInView ? 1 : 0}
-                    transform={isInView ? 'none' : 'translateY(200px)'}
-                    transition='all 1s 0.5s'
-                >
-                    Strong professional skills in Front-end developing. Have
-                    experience with bootstrapping front-end from zero on React,
-                    Redux.
-                </Text>
-                <Text
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    opacity={isInView ? 1 : 0}
-                    transform={isInView ? 'none' : 'translateY(200px)'}
-                    transition='all 1s 1s'
-                >
-                    Bootstrapping layouts with Tailwind CSS or ChakraUl and
-                    customizing them. Adaptive site design. Work as HTML5
-                    developer with mobile platforms. Have experience with JSON
-                    and worked with REST API.
-                </Text>
-                <Text
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    opacity={isInView ? 1 : 0}
-                    transform={isInView ? 'none' : 'translateY(200px)'}
-                    transition='all 1s 1.5s'
-                >
-                    My constant goal is to understand the client&apos;s business
-                    requirements and produce a maintainable code of high
-                    quality.
-                </Text>
+                <PortableText
+                    value={body}
+                    components={{ block: { normal: ({ index, children }) => (
+                        <Text
+                            as={motion.p}
+                            fontSize={{ base: 'md', md: 'lg' }}
+                            initial={{ opacity: 0 }}
+                            animate={isInView ? { opacity: 1, transition: { duration: 1, delay: (index + 1) * 0.5 } } : undefined}
+                        >{children}</Text>
+                    ) } }}
+                />
             </Stack>
             <Box pt={{ base: 5, md: 20 }} pb={{ base: 15, md: 0 }}>
                 <ParalaxText
-                    words={[
-                        'javascript',
-                        'typescript',
-                        'react',
-                        'redux',
-                        'nextjs',
-                        'framer-motion',
-                        'javascript',
-                        'typescript',
-                    ]}
+                    words={skillsLines.first}
                     baseVelocity={3}
                 />
                 <ParalaxText
-                    words={[
-                        'html5',
-                        'css3',
-                        'scss',
-                        'less',
-                        'styled-components',
-                        'webpack',
-                        'agile',
-                        'scrum',
-                        'html5',
-                        'css3',
-                        'scss',
-                        'less',
-                        'styled-components',
-                        'webpack',
-                        'agile',
-                        'react native',
-                    ]}
+                    words={skillsLines.second}
                     baseVelocity={-3}
                 />
             </Box>
-            <ScrollToBottomBtn sectionNumber={3} />
+            <JumpingArrow />
         </Flex>
     );
 };

@@ -19,7 +19,7 @@ import heroParticles from 'public/data/hero-particles.json';
 import heroParticlesDark from 'public/data/hero-particles-dark.json';
 
 import WavyText from 'components/UI/WavyText';
-import ScrollToBottomBtn from '../UI/ScrollToBottomBtn';
+import ScrollToBottomBtn from '../UI/JumpingArrow';
 
 const Particles = dynamic(() => import('components/UI/Particles'));
 const Avatar = dynamic(() => import('components/HomePage/Hero/MyPicture'));

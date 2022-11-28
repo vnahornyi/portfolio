@@ -6,13 +6,20 @@ import {
     useBreakpointValue,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { useInView } from 'framer-motion';
+
+import { useInView, motion } from 'framer-motion';
 import { useRef } from 'react';
+import { PortableText } from '@portabletext/react';
+
+
+import { IPage } from 'types';
 
 import BigTitle from 'components/UI/BigTitle';
-import ScrollToBottomBtn from 'components/UI/ScrollToBottomBtn';
+import JumpingArrow from 'components/UI/JumpingArrow';
 
-const About: React.FC = () => {
+type AboutPropsType = IPage;
+
+const About: React.FC<AboutPropsType> = ({ title, body }) => {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true });
 
@@ -44,49 +51,23 @@ const About: React.FC = () => {
                     opacity={isInView ? 1 : 0}
                     transform={isInView ? 'none' : 'translateX(-250px)'}
                 >
-                    My, Myself & I
+                    {title}
                 </Heading>
-                <Text
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    opacity={isInView ? 1 : 0}
-                    transform={isInView ? 'none' : 'translateX(-250px)'}
-                    transition='all 1s 0.5s'
-                >
-                    I&apos;m a front-end developer located in Ukraine. I love to
-                    create complex SPA and beautiful web applications with great
-                    user experience.
-                </Text>
-                <Text
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    opacity={isInView ? 1 : 0}
-                    transform={isInView ? 'none' : 'translateX(-250px)'}
-                    transition='all 1s 1s'
-                >
-                    My hobby is always to learn something new, whether it is
-                    some new technology in it or something far from my kind of
-                    employment.
-                </Text>
-                <Text
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    opacity={isInView ? 1 : 0}
-                    transform={isInView ? 'none' : 'translateX(-250px)'}
-                    transition='all 1s 1.5s'
-                >
-                    In my spare time I study to prepare different new dishes,
-                    which have not yet prepared, walking and spending time with
-                    the family.
-                </Text>
-                <Text
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    opacity={isInView ? 1 : 0}
-                    transform={isInView ? 'none' : 'translateX(-250px)'}
-                    transition='all 1s 2s'
-                >
-                    I&apos;m interested in the whole frontend stack Like trying
-                    new things and building great projects.
-                </Text>
+                <PortableText
+                    value={body}
+                    components={{ block: {
+                        normal: ({ children, index }) => (
+                            <Text
+                                as={motion.p}
+                                fontSize={{ base: 'md', md: 'lg' }}
+                                initial={{ opacity: 0, x: -250 }}
+                                animate={isInView ? { opacity: 1, x: 0, transition: { duration: 1, delay: (index + 1) * 0.5 } } : undefined}
+                            >{children}</Text>
+                        )
+                    } }}
+                />
             </Stack>
-            <ScrollToBottomBtn sectionNumber={4} alwaysWhite />
+            <JumpingArrow alwaysWhite />
             <BigTitle
                 text='ABOUT'
                 bottom={useBreakpointValue({ base: '-20px', lg: '0' })}

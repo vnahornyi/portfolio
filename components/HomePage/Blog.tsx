@@ -8,11 +8,16 @@ import {
 import { motion } from 'framer-motion';
 import NextLink from 'next/link';
 
-import ScrollToBottomBtn from 'components/UI/ScrollToBottomBtn';
+import JumpingArrow from 'components/UI/JumpingArrow';
 import MiniCard from './Blog/MiniCard';
 import BigTitle from 'components/UI/BigTitle';
+import { IPost } from 'types';
 
-const Blog: React.FC = () => {
+interface IBlogProps {
+    posts: IPost[];
+}
+
+const Blog: React.FC<IBlogProps> = ({ posts }) => {
     return (
         <Flex
             direction='column'
@@ -38,12 +43,10 @@ const Blog: React.FC = () => {
                 gap={{ base: 5, lg: 16 }}
                 zIndex={1}
             >
-                {new Array(9).fill(0).map((_, idx) => (
+                {!!posts.length && posts.map((post, idx) => (
                     <MiniCard
-                        slug='test'
-                        title='Test'
-                        description='test'
-                        key={idx}
+                        {...post}
+                        key={post.id}
                         delay={idx + 1}
                     />
                 ))}
@@ -52,7 +55,7 @@ const Blog: React.FC = () => {
                 See more...
             </Link>
             <Box pt='5'>
-                <ScrollToBottomBtn sectionNumber={2} alwaysWhite />
+                <JumpingArrow alwaysWhite />
             </Box>
             <BigTitle
                 top={useBreakpointValue({ base: '-20px', lg: '0' })}
