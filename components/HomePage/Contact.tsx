@@ -14,7 +14,6 @@ import {
     Text,
     Textarea,
     useBoolean,
-    useBreakpointValue,
     useColorModeValue,
     useToast,
     VStack,
@@ -28,7 +27,6 @@ import dynamic from 'next/dynamic';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 
 import contactConfig from 'public/data/contact-particles.json';
-import BigTitle from 'components/UI/BigTitle';
 
 const Particles = dynamic(() => import('components/UI/Particles'));
 
@@ -284,11 +282,6 @@ const Contact: React.FC = () => {
                     </Box>
                 </Box>
             </Flex>
-            <BigTitle
-                bottom={useBreakpointValue({ base: '-20px', lg: '0' })}
-                right={useBreakpointValue({ base: '5%', lg: '50%' })}
-                text='CONTACT'
-            />
             <Particles config={contactConfig} />
         </Container>
     );
