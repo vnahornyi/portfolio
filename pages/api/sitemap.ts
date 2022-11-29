@@ -1,7 +1,7 @@
 import { NextApiHandler } from 'next';
 import { groq } from 'next-sanity';
 import client from 'utils/client';
-import fs from 'fs';
+import glob from 'glob';
 
 const handler: NextApiHandler = async (req, res) => {
     res.statusCode = 200;
@@ -13,33 +13,23 @@ const handler: NextApiHandler = async (req, res) => {
         "slug": slug.current
     }`);
 
-    const staticPaths = fs
-        .readdirSync('pages')
+    const pagesDir = 'pages/**/*.tsx';
+    const pagePaths = glob.sync(pagesDir);
+
+    const staticPaths = pagePaths
         .filter(staticPage => {
-            return ![
-                'api',
-                '_app.tsx',
-                '_document.tsx',
-                '404.tsx',
-                'index.tsx',
-            ].includes(staticPage);
+            return ['[', '/_', '404'].every(el => !staticPage.includes(el))
         })
         .map(
             staticPagePath =>
-                `${process.env.NEXT_PUBLIC_BASE_URL}/${staticPagePath}`
+                `${process.env.NEXT_PUBLIC_BASE_URL}${staticPagePath.split('pages').pop()?.replace('index.tsx', '')}`
         );
     const dynamicPaths = posts.map(
-        post => `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}`
+        post => `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}/`
     );
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-            <url>
-                <loc>${process.env.NEXT_PUBLIC_BASE_URL}</loc>
-                <lastmod>${new Date().toISOString()}</lastmod>
-                <changefreq>daily</changefreq>
-                <priority>1.0</priority>
-            </url>
             ${[...staticPaths, ...dynamicPaths].map(url => `
                 <url>
                     <loc>${url}</loc>
