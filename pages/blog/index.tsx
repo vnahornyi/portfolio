@@ -7,6 +7,7 @@ import client from 'utils/client';
 
 import Card from 'components/BlogPage/Card';
 import { useState } from 'react';
+import Head from 'next/head';
 
 interface IBlogPageProps {
     posts: IPost[];
@@ -48,6 +49,10 @@ const BlogPage: NextPage<IBlogPageProps> = ({ posts, total }) => {
             justifyContent='center'
             alignItems='center'
         >
+            <Head>
+                <title>Blog Page | Vladyslav Nahornyi</title>
+                <meta name='description' content='Blog of Vladyslav Nahornyi about development, science and it. Here you can find something interesting for yourself' />
+            </Head>
             <VStack spacing={{ base: 5, md: 10 }}>
                 {loadedPosts.map((post, idx) => (
                     <Card key={post.id} index={idx} {...post} />

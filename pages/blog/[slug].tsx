@@ -10,13 +10,14 @@ import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { IPost } from 'types';
 import client from 'utils/client';
 import portableComponents from 'utils/portableComponents';
+import Head from 'next/head';
 
 interface IPostPageProps {
     post: IPost;
 }
 
 const PostPage: NextPage<IPostPageProps> = ({ post }) => {
-    const { title, mainImage, body } = post;
+    const { title, mainImage, body, description } = post;
 
     return (
         <Container
@@ -27,6 +28,10 @@ const PostPage: NextPage<IPostPageProps> = ({ post }) => {
             py={{ base: 20, md: 24 }}
             px='5'
         >
+            <Head>
+                <title>{title} | Vladyslav Nahornyi</title>
+                <meta name='description' content={description} />
+            </Head>
             <VStack spacing={{ base: 5, md: 10 }} align='start'>
                 <Button
                     variant='link'
