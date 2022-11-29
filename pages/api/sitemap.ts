@@ -1,7 +1,6 @@
 import { NextApiHandler } from 'next';
 import { groq } from 'next-sanity';
 import client from 'utils/client';
-import glob from 'glob';
 
 const handler: NextApiHandler = async (req, res) => {
     res.statusCode = 200;
@@ -13,19 +12,15 @@ const handler: NextApiHandler = async (req, res) => {
         "slug": slug.current
     }`);
 
-    const pagesDir = 'pages/**/*.tsx';
-    const pagePaths = glob.sync(pagesDir);
-
-    const staticPaths = pagePaths
-        .filter(staticPage => {
-            return ['[', '/_', '404'].every(el => !staticPage.includes(el))
-        })
-        .map(
-            staticPagePath =>
-                `${process.env.NEXT_PUBLIC_BASE_URL}${staticPagePath.split('pages').pop()?.replace('index.tsx', '')}`
-        );
+    const staticPaths = [
+        '',
+        '/blog'
+    ].map(
+        staticPagePath =>
+            `${process.env.NEXT_PUBLIC_BASE_URL}${staticPagePath}`
+    );
     const dynamicPaths = posts.map(
-        post => `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}/`
+        post => `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}`
     );
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>

@@ -23,7 +23,6 @@
         "@sanity/image-url": "^1.0.1",
         "@vercel/analytics": "^0.1.5",
         "framer-motion": "^7.6.8",
-        "glob": "^8.0.3",
         "next": "13.0.4",
         "next-sanity": "^3.1.2",
         "react": "18.2.0",
@@ -36,7 +35,6 @@
         "tsparticles": "^2.5.3"
     },
     "devDependencies": {
-        "@types/glob": "^8.0.0",
         "@types/node": "18.11.9",
         "@types/react": "18.0.25",
         "@types/react-dom": "18.0.9",
