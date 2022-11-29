@@ -25,6 +25,7 @@ const PostPage: NextPage<IPostPageProps> = ({ post }) => {
             maxW='container.md'
             py={{ base: 20, md: 24 }}
             px='5'
+            overflow='hidden'
         >
             <Head>
                 <title>{title} | Vladyslav Nahornyi</title>
