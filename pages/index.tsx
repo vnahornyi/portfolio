@@ -4,6 +4,7 @@ import { GetStaticProps, NextPage } from 'next';
 import client from 'utils/client';
 import { groq } from 'next-sanity';
 import { IPage, IPost } from 'types';
+import Head from 'next/head';
 
 const Blog = dynamic(() => import('components/HomePage/Blog'));
 const Skills = dynamic(() => import('components/HomePage/Skills'));
@@ -25,6 +26,10 @@ interface IHomePageProps {
 const Home: NextPage<IHomePageProps> = ({ pages, skillsLines, posts }) => {
     return (
         <>
+            <Head>
+                <title>Vladyslav Nahornyi - Home Page</title>
+                <meta name='description' content={`My name is Vladyslav, I'm a front-end developer located in Ukraine.`} />
+            </Head>
             <Hero />
             <Blog posts={posts} />
             <Skills {...pages.skills} skillsLines={skillsLines} />
