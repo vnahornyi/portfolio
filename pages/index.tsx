@@ -29,6 +29,7 @@ const Home: NextPage<IHomePageProps> = ({ pages, skillsLines, posts }) => {
             <Head>
                 <title>Vladyslav Nahornyi - Home Page</title>
                 <meta name='description' content={`My name is Vladyslav, I'm a front-end developer located in Ukraine.`} />
+                <link rel='canonical' href='https://www.vnahornyi.me' />
             </Head>
             <Hero />
             <Blog posts={posts} />

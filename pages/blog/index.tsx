@@ -52,6 +52,7 @@ const BlogPage: NextPage<IBlogPageProps> = ({ posts, total }) => {
             <Head>
                 <title>Blog Page | Vladyslav Nahornyi</title>
                 <meta name='description' content='Blog of Vladyslav Nahornyi about development, science and it. Here you can find something interesting for yourself' />
+                <link rel='canonical' href='https://www.vnahornyi.me/blog' />
             </Head>
             <VStack spacing={{ base: 5, md: 10 }}>
                 {loadedPosts.map((post, idx) => (

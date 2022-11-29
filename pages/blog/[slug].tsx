@@ -17,7 +17,7 @@ interface IPostPageProps {
 }
 
 const PostPage: NextPage<IPostPageProps> = ({ post }) => {
-    const { title, mainImage, body, description } = post;
+    const { title, mainImage, body, description, slug } = post;
 
     return (
         <Container
@@ -31,6 +31,7 @@ const PostPage: NextPage<IPostPageProps> = ({ post }) => {
             <Head>
                 <title>{title} | Vladyslav Nahornyi</title>
                 <meta name='description' content={description} />
+                <link rel='canonical' href={`https://www.vnahornyi.me/blog/${slug}`} />
             </Head>
             <VStack spacing={{ base: 5, md: 10 }} align='start'>
                 <Button

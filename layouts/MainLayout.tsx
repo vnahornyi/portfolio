@@ -18,6 +18,8 @@ const MainLayout: React.FC<IMainLayoutProps> = ({ children }) => {
                     name='keywords'
                     content='Vladyslav Nahornyi, vladyslav nahornyi, vnahornyi, vn, front-end, Front-End, React, Redux, TypeScript, TS, JS, js, react, redux, framer-motion, sass, less, scss, css, html, html5, css3, Next.js, nextjs'
                 />
+                <meta name='author' content='Vladyslav Nahornyi' />
+                <meta name='robots' content='index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' />
             </Head>
             <Header />
             {children}
