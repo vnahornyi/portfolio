@@ -56,7 +56,7 @@ const BlogPage: NextPage<IBlogPageProps> = ({ posts, total }) => {
             </Head>
             <VStack spacing={{ base: 5, md: 10 }}>
                 {loadedPosts.map((post, idx) => (
-                    <Card key={post.id} index={idx} {...post} />
+                    <Card key={post.id} index={idx} priority={idx < 2} {...post} />
                 ))}
                 {total !== loadedPosts.length && (
                     <Button

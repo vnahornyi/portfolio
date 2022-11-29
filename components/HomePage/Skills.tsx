@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
-import { useInView, motion } from 'framer-motion';
+import { useInView, m } from 'framer-motion';
 import { PortableText } from '@portabletext/react';
 
 import { IPage } from 'types';
@@ -69,7 +69,7 @@ const Skills: React.FC<ISkillsProps> = ({ title, body, skillsLines }) => {
                     value={body}
                     components={{ block: { normal: ({ index, children }) => (
                         <Text
-                            as={motion.p}
+                            as={m.p}
                             fontSize={{ base: 'md', md: 'lg' }}
                             initial={{ opacity: 0 }}
                             animate={isInView ? { opacity: 1, transition: { duration: 1, delay: (index + 1) * 0.5 } } : undefined}

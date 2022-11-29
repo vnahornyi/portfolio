@@ -7,7 +7,7 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 import NextLink from 'next/link';
 import { useRef } from 'react';
 
@@ -20,16 +20,33 @@ interface ICardProps extends IPost {
     index: number;
 }
 
-const Card: React.FC<ICardProps> = ({ mainImage, title, categories, slug, description, published, index }) => {
+const Card: React.FC<ICardProps> = ({
+    mainImage,
+    title,
+    categories,
+    slug,
+    description,
+    published,
+    index,
+    priority,
+}) => {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true });
 
     return (
         <Box
             ref={ref}
-            as={motion.div}
+            as={m.div}
             initial={{ x: index % 2 !== 0 ? 250 : -250, opacity: 0 }}
-            animate={isInView ? { x: 0, opacity: 1, transition: { delay: 0.2, duration: 1 } } : undefined}
+            animate={
+                isInView
+                    ? {
+                          x: 0,
+                          opacity: 1,
+                          transition: { delay: 0.2, duration: 1 },
+                      }
+                    : undefined
+            }
             mt={{ base: 1, sm: 5 }}
             display='flex'
             flexDirection={{ base: 'column', sm: 'row' }}
@@ -100,7 +117,7 @@ const Card: React.FC<ICardProps> = ({ mainImage, title, categories, slug, descri
                 >
                     {description}
                 </Text>
-                <BlogAuthor date={new Date(published)} />
+                <BlogAuthor date={new Date(published)} priority={priority} />
             </Box>
         </Box>
     );

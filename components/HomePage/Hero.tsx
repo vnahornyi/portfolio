@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 
 import {
     AnimatePresence,
-    motion,
+    m,
     Variants
 } from 'framer-motion';
 
@@ -63,7 +63,7 @@ const Hero: React.FC = () => {
                     <AnimatePresence>
                         {showDesc && (
                             <Stack
-                                as={motion.div}
+                                as={m.div}
                                 variants={description}
                                 initial='hidden'
                                 animate='show'
@@ -77,6 +77,9 @@ const Hero: React.FC = () => {
                                     Front-end Developer based in Ukraine
                                 </Text>
                                 <Button
+                                    as={m.button}
+                                    whileHover={{ scale: 1.2 }}
+                                    whileTap={{ scale: 0.8 }}
                                     colorScheme='green'
                                     variant='outline'
                                     onClick={handleScrollToContact}

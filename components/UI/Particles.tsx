@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { AnimatePresence, m, useInView } from 'framer-motion';
 import { useCallback, useRef } from 'react';
 import ReactParticles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
@@ -24,7 +24,7 @@ const Particles: React.FC<IParticlesProps> = ({ config }) => {
             <AnimatePresence>
                 {show && (
                     <Box
-                        as={motion.div}
+                        as={m.div}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ display: 'none' }}

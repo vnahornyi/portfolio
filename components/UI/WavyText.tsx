@@ -1,5 +1,5 @@
 import { Heading, Text, useColorModeValue } from '@chakra-ui/react';
-import { motion, Variants } from 'framer-motion';
+import { m, Variants } from 'framer-motion';
 
 interface IWavyTextProps {
     text: string;
@@ -49,7 +49,7 @@ const WavyText: React.FC<IWavyTextProps> = ({
 
     return (
         <Heading
-            as={motion.h1}
+            as={m.h1}
             variant='h1'
             fontSize={{ base: 'xl', md: '3xl' }}
             display='flex'
@@ -62,7 +62,7 @@ const WavyText: React.FC<IWavyTextProps> = ({
         >
             {letters.map((letter, idx) => (
                 <Text
-                    as={motion.span}
+                    as={m.span}
                     key={idx}
                     _hover={{ color: 'green.400' }}
                     variants={child}

@@ -2,10 +2,9 @@ import {
     useAnimationFrame,
     useMotionValue,
     useScroll,
-    useSpring,
     useTransform,
     useVelocity,
-    motion,
+    m,
 } from 'framer-motion';
 
 import { wrap } from '@motionone/utils';
@@ -17,7 +16,7 @@ interface IParalaxTextProps {
     baseVelocity?: number;
 }
 
-const MotionFlex = motion(Flex);
+const MotionFlex = m(Flex);
 
 const ParalaxText: React.FC<IParalaxTextProps> = ({
     words,
@@ -26,11 +25,7 @@ const ParalaxText: React.FC<IParalaxTextProps> = ({
     const baseX = useMotionValue(0);
     const { scrollY } = useScroll();
     const scrollVelocity = useVelocity(scrollY);
-    const smoothVelocity = useSpring(scrollVelocity, {
-        damping: 50,
-        stiffness: 400,
-    });
-    const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    const velocityFactor = useTransform(scrollVelocity, [0, 1000], [0, 5], {
         clamp: false,
     });
 
@@ -63,7 +58,7 @@ const ParalaxText: React.FC<IParalaxTextProps> = ({
             zIndex={1}
         >
             <MotionFlex
-                as={motion.div}
+                as={m.div}
                 mx='auto'
                 fontWeight='600'
                 textTransform='uppercase'

@@ -1,7 +1,7 @@
 import { Box, Button, Container, Heading, VStack } from '@chakra-ui/react';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { groq } from 'next-sanity';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import NextLink from 'next/link';
@@ -21,9 +21,7 @@ const PostPage: NextPage<IPostPageProps> = ({ post }) => {
 
     return (
         <Container
-            as={motion.article}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            as='article'
             maxW='container.md'
             py={{ base: 20, md: 24 }}
             px='5'
@@ -31,7 +29,10 @@ const PostPage: NextPage<IPostPageProps> = ({ post }) => {
             <Head>
                 <title>{title} | Vladyslav Nahornyi</title>
                 <meta name='description' content={description} />
-                <link rel='canonical' href={`https://www.vnahornyi.me/blog/${slug}`} />
+                <link
+                    rel='canonical'
+                    href={`https://www.vnahornyi.me/blog/${slug}`}
+                />
             </Head>
             <VStack spacing={{ base: 5, md: 10 }} align='start'>
                 <Button
@@ -59,7 +60,14 @@ const PostPage: NextPage<IPostPageProps> = ({ post }) => {
                         />
                     </Box>
                 )}
-                <Heading variant='h1' textAlign='center' w='full'>
+                <Heading
+                    variant='h1'
+                    textAlign='center'
+                    w='full'
+                    as={m.h1}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                >
                     {title}
                 </Heading>
                 {body && (

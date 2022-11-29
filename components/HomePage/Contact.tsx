@@ -21,6 +21,7 @@ import {
     WrapItem,
 } from '@chakra-ui/react';
 
+import { m } from 'framer-motion';
 import { MdPhone, MdEmail, MdLocationOn, MdOutlineEmail } from 'react-icons/md';
 import { BsGithub, BsInstagram, BsDiscord, BsPerson } from 'react-icons/bs';
 import dynamic from 'next/dynamic';
@@ -41,14 +42,14 @@ const Contact: React.FC = () => {
     const [isLoading, setLoading] = useBoolean();
     const toast = useToast({ position: 'bottom-right' });
 
-    const onSubmit: SubmitHandler<IContactForm> = async (data) => {
+    const onSubmit: SubmitHandler<IContactForm> = async data => {
         setLoading.on();
 
         try {
             const response = await fetch('/api/message', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             });
             const { created } = await response.json();
 
@@ -59,7 +60,7 @@ const Contact: React.FC = () => {
                 description: 'I will be with you within 2 days',
                 status: 'success',
                 duration: 3000,
-                isClosable: false
+                isClosable: false,
             });
             reset({ name: '', email: '', message: '' });
         } catch {
@@ -68,8 +69,8 @@ const Contact: React.FC = () => {
                 description: 'Error sending message. Try again',
                 status: 'error',
                 duration: 3000,
-                isClosable: true
-            })
+                isClosable: true,
+            });
         } finally {
             setLoading.off();
         }
@@ -109,7 +110,14 @@ const Contact: React.FC = () => {
                                     >
                                         Fill up the form below to contact
                                     </Text>
-                                    <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
+                                    <Box
+                                        py={{
+                                            base: 5,
+                                            sm: 5,
+                                            md: 8,
+                                            lg: 10,
+                                        }}
+                                    >
                                         <VStack
                                             pl={0}
                                             spacing={3}
@@ -213,7 +221,9 @@ const Contact: React.FC = () => {
                                                 control={control}
                                                 render={({ field }) => (
                                                     <FormControl isRequired>
-                                                        <FormLabel>Your Name</FormLabel>
+                                                        <FormLabel>
+                                                            Your Name
+                                                        </FormLabel>
                                                         <InputGroup borderColor='#E0E1E7'>
                                                             <InputLeftElement pointerEvents='none'>
                                                                 <BsPerson color='gray.800' />
@@ -232,7 +242,9 @@ const Contact: React.FC = () => {
                                                 control={control}
                                                 render={({ field }) => (
                                                     <FormControl isRequired>
-                                                        <FormLabel>Mail</FormLabel>
+                                                        <FormLabel>
+                                                            Mail
+                                                        </FormLabel>
                                                         <InputGroup borderColor='#E0E1E7'>
                                                             <InputLeftElement pointerEvents='none'>
                                                                 <MdOutlineEmail color='gray.800' />
@@ -251,21 +263,26 @@ const Contact: React.FC = () => {
                                                 control={control}
                                                 render={({ field }) => (
                                                     <FormControl isRequired>
-                                                    <FormLabel>Message</FormLabel>
-                                                    <Textarea
-                                                        borderColor='gray.300'
-                                                        {...field}
-                                                        _hover={{
-                                                            borderRadius:
-                                                                'gray.300',
-                                                        }}
-                                                        placeholder='message'
-                                                    />
+                                                        <FormLabel>
+                                                            Message
+                                                        </FormLabel>
+                                                        <Textarea
+                                                            borderColor='gray.300'
+                                                            {...field}
+                                                            _hover={{
+                                                                borderRadius:
+                                                                    'gray.300',
+                                                            }}
+                                                            placeholder='message'
+                                                        />
                                                     </FormControl>
                                                 )}
                                             />
                                             <FormControl float='right'>
                                                 <Button
+                                                    as={m.button}
+                                                    whileHover={{ scale: 1.2 }}
+                                                    whileTap={{ scale: 0.8 }}
                                                     variant='solid'
                                                     colorScheme='green'
                                                     type='submit'

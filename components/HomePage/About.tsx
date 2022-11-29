@@ -7,7 +7,7 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
-import { useInView, motion } from 'framer-motion';
+import { useInView, m } from 'framer-motion';
 import { useRef } from 'react';
 import { PortableText } from '@portabletext/react';
 
@@ -58,7 +58,7 @@ const About: React.FC<AboutPropsType> = ({ title, body }) => {
                     components={{ block: {
                         normal: ({ children, index }) => (
                             <Text
-                                as={motion.p}
+                                as={m.p}
                                 fontSize={{ base: 'md', md: 'lg' }}
                                 initial={{ opacity: 0, x: -250 }}
                                 animate={isInView ? { opacity: 1, x: 0, transition: { duration: 1, delay: (index + 1) * 0.5 } } : undefined}

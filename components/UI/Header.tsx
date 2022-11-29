@@ -1,10 +1,10 @@
 import { Button, chakra, Flex, Stack, Text } from '@chakra-ui/react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 
 import ThemePicker from './Header/ThemePicker';
 
-const MotionHeader = chakra(motion.header);
+const MotionHeader = chakra(m.header);
 
 const Header = () => {
     const { scrollY } = useScroll();
@@ -20,7 +20,6 @@ const Header = () => {
 
     return (
         <MotionHeader
-            as={motion.header}
             display='flex'
             justifyContent='center'
             style={{ backdropFilter: backgropBlur }}
@@ -48,7 +47,7 @@ const Header = () => {
                 <Stack spacing={5} direction='row'>
                     <ThemePicker />
                     <Button
-                        as={motion.button}
+                        as={m.button}
                         colorScheme='green'
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.8 }}

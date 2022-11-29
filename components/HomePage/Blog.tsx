@@ -5,7 +5,7 @@ import {
     useBreakpointValue,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import NextLink from 'next/link';
 
 import JumpingArrow from 'components/UI/JumpingArrow';
@@ -39,7 +39,7 @@ const Blog: React.FC<IBlogProps> = ({ posts }) => {
                 maxW='container.xl'
                 w='full'
                 h='auto'
-                as={motion.div}
+                as={m.div}
                 justify='center'
                 wrap='wrap'
                 gap={{ base: 5, lg: 16 }}
