@@ -96,7 +96,7 @@ export const getStaticProps: GetStaticProps = async () => {
         if (!posts.length) throw new Error();
 
         return {
-            revalidate: 28800,
+            revalidate: 60,
             props: {
                 total,
                 posts,
