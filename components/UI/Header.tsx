@@ -22,7 +22,7 @@ const Header = () => {
         <MotionHeader
             display='flex'
             justifyContent='center'
-            style={{ backdropFilter: backgropBlur }}
+            style={{ backdropFilter: backgropBlur, WebkitBackdropFilter: backgropBlur }}
             zIndex={5}
             pos='fixed'
             w='full'
