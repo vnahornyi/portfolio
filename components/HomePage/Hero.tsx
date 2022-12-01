@@ -8,6 +8,8 @@ import {
 } from '@chakra-ui/react';
 
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
+import { RefObject} from 'react';
 
 import {
     AnimatePresence,
@@ -24,13 +26,18 @@ import ScrollToBottomBtn from '../UI/JumpingArrow';
 const Particles = dynamic(() => import('components/UI/Particles'));
 const Avatar = dynamic(() => import('components/HomePage/Hero/MyPicture'));
 
-const Hero: React.FC = () => {
+interface IHeroProps {
+    contactRef: RefObject<HTMLDivElement>;
+}
+
+const Hero: React.FC<IHeroProps> = ({ contactRef }) => {
+    const { t } = useTranslation('home');
     const [showDesc, setShowDesc] = useBoolean();
     const particlesConfig = useColorModeValue(heroParticles, heroParticlesDark);
 
     const handleScrollToContact = () => {
         window.scrollTo({
-            top: document.body.scrollHeight,
+            top: contactRef.current?.offsetTop,
             behavior: 'smooth'
         });
     }
@@ -55,7 +62,7 @@ const Hero: React.FC = () => {
             >
                 <Stack direction='column' spacing='4'>
                     <WavyText
-                        text={`Hi, I'm Vladyslav Nahornyi`}
+                        text={t('title')}
                         delay={0.5}
                         duration={0.1}
                         onAnimationComplete={setShowDesc.on}
@@ -74,7 +81,7 @@ const Hero: React.FC = () => {
                                     fontWeight='bold'
                                     color='green.400'
                                 >
-                                    Front-end Developer based in Ukraine
+                                    {t('description')}
                                 </Text>
                                 <Button
                                     as={m.button}
@@ -85,7 +92,7 @@ const Hero: React.FC = () => {
                                     onClick={handleScrollToContact}
                                     size={{ base: 'sm', md: 'md' }}
                                 >
-                                    Contact me!
+                                    {t('contact-btn')}
                                 </Button>
                             </Stack>
                         )}

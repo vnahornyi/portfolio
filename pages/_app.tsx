@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { LazyMotion, domAnimation } from 'framer-motion';
 
-import MainLayout from 'layouts/MainLayout';
 import theme from 'constants/theme';
 
 const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
@@ -21,9 +20,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
     return (
         <ChakraProvider theme={theme}>
             <LazyMotion features={domAnimation} strict>
-                <MainLayout>
-                    <Component {...pageProps} key={router.route} />
-                </MainLayout>
+                <Component {...pageProps} key={router.route} />
             </LazyMotion>
             <Analytics />
         </ChakraProvider>

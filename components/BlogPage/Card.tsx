@@ -11,7 +11,9 @@ import { m, useInView } from 'framer-motion';
 import NextLink from 'next/link';
 import { useRef } from 'react';
 
+import { POST } from 'constants/routes';
 import { IPost } from 'types';
+
 import BlogAuthor from './Card/BlogAuthor';
 import BlogTags from './Card/BlogTags';
 
@@ -32,6 +34,7 @@ const Card: React.FC<ICardProps> = ({
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true });
+    const path = POST.replace('[slug]', slug);
 
     return (
         <Box
@@ -67,7 +70,7 @@ const Card: React.FC<ICardProps> = ({
                 >
                     <Link
                         as={NextLink}
-                        href={`/blog/${slug}`}
+                        href={path}
                         textDecoration='none'
                         _hover={{ textDecoration: 'none' }}
                     >
@@ -102,7 +105,7 @@ const Card: React.FC<ICardProps> = ({
                 <Heading mt='1'>
                     <Link
                         as={NextLink}
-                        href={`/blog/${slug}`}
+                        href={path}
                         textDecoration='none'
                         _hover={{ textDecoration: 'none' }}
                     >

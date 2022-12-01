@@ -1,30 +1,44 @@
 import { Box, chakra } from '@chakra-ui/react';
-import { m, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useSpring, useTransform } from 'framer-motion';
+import { ResumeContext } from 'layouts/MainLayout';
 import Image from 'next/image';
-
-import me from 'public/images/me.png';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 const MotionAvatar = chakra(m.div);
-const ChackraImage = chakra(Image);
 
-const renderImage = () => (
-    <ChackraImage
-        rounded='full'
-        w='full'
-        h='full'
-        objectFit='cover'
-        src={me}
-        alt='Vladyslav Nahornyi'
-        priority
-    />
-);
+export const StaticImage: React.FC = () => {
+    const resume = useContext(ResumeContext);
+
+    return (
+        <Box
+            rounded='full'
+            w='full'
+            h='full'
+            objectFit='cover'
+            objectPosition='center'
+            overflow='hidden'
+        >
+            <Image
+                width={resume?.image.width}
+                height={resume?.image.height}
+                src={resume?.image.src ?? ''}
+                blurDataURL={resume?.image.placeholder}
+                alt='Vladyslav Nahornyi'
+                priority
+            />
+        </Box>
+    );
+}
 
 const MyPicture: React.FC = () => {
     const [size, setSize] = useState({ width: 0, height: 0 });
     const { scrollY } = useScroll();
+    const springScroll = useSpring(scrollY, {
+        damping: 50,
+        stiffness: 400
+    });
     const animateX = useTransform(
-        scrollY,
+        springScroll,
         [0, size.height ?? 0],
         [0, (size.width ?? 0) + 250]
     );
@@ -40,7 +54,7 @@ const MyPicture: React.FC = () => {
             h={{ base: '200px', md: '250px' }}
             rounded='full'
         >
-            {renderImage()}
+            <StaticImage />
         </Box>
     );
 
@@ -52,7 +66,7 @@ const MyPicture: React.FC = () => {
             style={{ x: animateX, rotate: animateX }}
             rounded='full'
         >
-            {renderImage()}
+            <StaticImage />
         </MotionAvatar>
     );
 };

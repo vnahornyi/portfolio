@@ -7,17 +7,22 @@ import {
 } from '@chakra-ui/react';
 import { m } from 'framer-motion';
 import NextLink from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
+
+import { BLOG } from 'constants/routes';
+import { IPost } from 'types';
 
 import JumpingArrow from 'components/UI/JumpingArrow';
-import MiniCard from './Blog/MiniCard';
 import BigTitle from 'components/UI/BigTitle';
-import { IPost } from 'types';
+import MiniCard from './Blog/MiniCard';
 
 interface IBlogProps {
     posts: IPost[];
 }
 
 const Blog: React.FC<IBlogProps> = ({ posts }) => {
+    const { t } = useTranslation('common');
+    
     if (!posts.length) return null;
     
     return (
@@ -53,8 +58,8 @@ const Blog: React.FC<IBlogProps> = ({ posts }) => {
                     />
                 ))}
             </Flex>
-            <Link as={NextLink} href='/blog' mt='16' fontWeight='bold'>
-                See more...
+            <Link as={NextLink} href={BLOG} mt='16' fontWeight='bold'>
+                {t('see-more')}
             </Link>
             <Box pt='5'>
                 <JumpingArrow alwaysWhite />
@@ -62,7 +67,7 @@ const Blog: React.FC<IBlogProps> = ({ posts }) => {
             <BigTitle
                 top={useBreakpointValue({ base: '-20px', lg: '0' })}
                 left={useBreakpointValue({ base: '5%', lg: '50%' })}
-                text='BLOG'
+                text='big-title-blog'
             />
         </Flex>
     );

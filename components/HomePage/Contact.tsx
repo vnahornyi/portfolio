@@ -25,7 +25,9 @@ import { m } from 'framer-motion';
 import { MdPhone, MdEmail, MdLocationOn, MdOutlineEmail } from 'react-icons/md';
 import { BsGithub, BsInstagram, BsDiscord, BsPerson } from 'react-icons/bs';
 import dynamic from 'next/dynamic';
+import { RefObject } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import useTranslation from 'next-translate/useTranslation';
 
 import contactConfig from 'public/data/contact-particles.json';
 
@@ -37,7 +39,12 @@ interface IContactForm {
     message: string;
 }
 
-const Contact: React.FC = () => {
+interface IContactProps {
+    contactRef: RefObject<HTMLDivElement>;
+}
+
+const Contact: React.FC<IContactProps> = ({ contactRef }) => {
+    const { t } = useTranslation('contact');
     const { control, handleSubmit, reset } = useForm<IContactForm>();
     const [isLoading, setLoading] = useBoolean();
     const toast = useToast({ position: 'bottom-right' });
@@ -56,8 +63,8 @@ const Contact: React.FC = () => {
             if (!created) throw new Error();
 
             toast({
-                title: 'Message sent',
-                description: 'I will be with you within 2 days',
+                title: t('success-title'),
+                description: t('success-description'),
                 status: 'success',
                 duration: 3000,
                 isClosable: false,
@@ -65,8 +72,8 @@ const Contact: React.FC = () => {
             reset({ name: '', email: '', message: '' });
         } catch {
             toast({
-                title: 'Error',
-                description: 'Error sending message. Try again',
+                title: t('error-title'),
+                description: t('error-description'),
                 status: 'error',
                 duration: 3000,
                 isClosable: true,
@@ -78,6 +85,7 @@ const Contact: React.FC = () => {
 
     return (
         <Container
+            ref={contactRef}
             maxW='full'
             pos='relative'
             minH='calc(100vh)'
@@ -100,7 +108,7 @@ const Contact: React.FC = () => {
                         <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
                             <WrapItem>
                                 <Box>
-                                    <Heading>Contact</Heading>
+                                    <Heading>{t('title')}</Heading>
                                     <Text
                                         mt={{ sm: 3, md: 3, lg: 5 }}
                                         color={useColorModeValue(
@@ -108,7 +116,7 @@ const Contact: React.FC = () => {
                                             'white'
                                         )}
                                     >
-                                        Fill up the form below to contact
+                                        {t('description')}
                                     </Text>
                                     <Box
                                         py={{
@@ -159,7 +167,7 @@ const Contact: React.FC = () => {
                                                     <MdLocationOn size='20px' />
                                                 }
                                             >
-                                                Vinnytsia, Ukraine
+                                                {t('location')}
                                             </Button>
                                         </VStack>
                                     </Box>
@@ -222,7 +230,7 @@ const Contact: React.FC = () => {
                                                 render={({ field }) => (
                                                     <FormControl isRequired>
                                                         <FormLabel>
-                                                            Your Name
+                                                            {t('name')}
                                                         </FormLabel>
                                                         <InputGroup borderColor='#E0E1E7'>
                                                             <InputLeftElement pointerEvents='none'>
@@ -243,7 +251,7 @@ const Contact: React.FC = () => {
                                                 render={({ field }) => (
                                                     <FormControl isRequired>
                                                         <FormLabel>
-                                                            Mail
+                                                            {t('email')}
                                                         </FormLabel>
                                                         <InputGroup borderColor='#E0E1E7'>
                                                             <InputLeftElement pointerEvents='none'>
@@ -264,7 +272,7 @@ const Contact: React.FC = () => {
                                                 render={({ field }) => (
                                                     <FormControl isRequired>
                                                         <FormLabel>
-                                                            Message
+                                                            {t('message')}
                                                         </FormLabel>
                                                         <Textarea
                                                             borderColor='gray.300'
@@ -288,7 +296,7 @@ const Contact: React.FC = () => {
                                                     type='submit'
                                                     isLoading={isLoading}
                                                 >
-                                                    Send Message
+                                                    {t('send-message-btn')}
                                                 </Button>
                                             </FormControl>
                                         </VStack>

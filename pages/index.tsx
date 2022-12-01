@@ -1,10 +1,16 @@
 import dynamic from 'next/dynamic';
-import Hero from 'components/HomePage/Hero';
 import { GetStaticProps, NextPage } from 'next';
-import client from 'utils/client';
 import { groq } from 'next-sanity';
-import { IPage, IPost } from 'types';
 import Head from 'next/head';
+import { useRef } from 'react';
+
+import { IPage, IPost, IResume } from 'types';
+import client from 'utils/client';
+import getResume from 'utils/getResume';
+
+import Hero from 'components/HomePage/Hero';
+import MainLayout from 'layouts/MainLayout';
+import useTranslation from 'next-translate/useTranslation';
 
 const Blog = dynamic(() => import('components/HomePage/Blog'));
 const Skills = dynamic(() => import('components/HomePage/Skills'));
@@ -21,30 +27,35 @@ interface IHomePageProps {
         second: string[]
     };
     posts: IPost[];
+    resume: IResume;
 }
 
-const Home: NextPage<IHomePageProps> = ({ pages, skillsLines, posts }) => {
+const Home: NextPage<IHomePageProps> = ({ pages, skillsLines, posts, resume }) => {
+    const contactRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation('home');
+
     return (
-        <>
+        <MainLayout resume={resume}>
             <Head>
-                <title>Vladyslav Nahornyi - Home Page</title>
+                <title>{t('head-title')} | Vladyslav Nahornyi</title>
                 <meta name='description' content={`My name is Vladyslav, I'm a front-end developer located in Ukraine.`} />
                 <link rel='canonical' href='https://www.vnahornyi.me' />
             </Head>
-            <Hero />
+            <Hero contactRef={contactRef} />
             <Blog posts={posts} />
             <Skills {...pages.skills} skillsLines={skillsLines} />
             <About {...pages.about} />
-            <Contact />
-        </>
+            <Contact contactRef={contactRef} />
+        </MainLayout>
     );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+    const resume = await getResume();
     const pages: IPage[] = await client.fetch(groq`*[_type == 'page'][]{
-        'body': body.en,
+        'body': body.${locale},
         'slug': slug.current,
-        'title': title.en
+        'title': title.${locale}
     }`);
     const skillsLines: { firstLine: string, secondLine: string } = await client.fetch(groq`*[_type == 'skills'][0]{
         firstLine,
@@ -55,10 +66,10 @@ export const getStaticProps: GetStaticProps = async () => {
         "modified": _updatedAt,
         "id": _id,
         "categories": categories[]._ref,
-        "description": description.en,
+        "description": description.${locale},
         "published": publishedAt,
         "slug": slug.current,
-        "title": title.en
+        "title": title.${locale}
       }`);
 
     return {
@@ -72,7 +83,8 @@ export const getStaticProps: GetStaticProps = async () => {
                 first: skillsLines.firstLine.split(' '),
                 second: skillsLines.secondLine.split(' ')
             },
-            posts
+            posts,
+            resume
         }
     }
 }

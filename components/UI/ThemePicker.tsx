@@ -7,7 +7,7 @@ const ThemePicker = () => {
 
     return (
         <IconButton
-            aria-label='toggle theme'
+            aria-label='Toggle theme'
             bg='transparent'
             onClick={toggleColorMode}
             size={{ base: 'sm', md: 'md' }}

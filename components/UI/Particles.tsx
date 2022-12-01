@@ -49,6 +49,6 @@ const Particles: React.FC<IParticlesProps> = ({ config }) => {
             </AnimatePresence>
         </Box>
     );
-}
+};
 
 export default Particles;

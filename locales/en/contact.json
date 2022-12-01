@@ -1,0 +1,13 @@
+{
+    "title": "Сontact",
+    "description": "Fill up the form below to contact",
+    "location": "Vinnytsia, Ukraine",
+    "name": "Your Name",
+    "email": "Mail",
+    "message": "Message",
+    "send-message-btn": "SEND MESSAGE",
+    "success-title": "Message sent",
+    "success-description": "I will be with you within few days",
+    "error-title": "Error",
+    "error-description": "Error sending message. Try again"
+}

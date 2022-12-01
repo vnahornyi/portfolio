@@ -1,4 +1,5 @@
 import { Text, useColorModeValue } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 
 interface IBitTitleProps {
     text: string;
@@ -9,6 +10,9 @@ interface IBitTitleProps {
 }
 
 const BigTitle: React.FC<IBitTitleProps> = ({ text, top, left, right, bottom }) => {
+    const { t, lang } = useTranslation('common');
+    const fs = `calc(5rem + ${lang === 'en' ? '5vw' : '1vw'})`;
+
     return (
         <Text
             zIndex={0}
@@ -16,12 +20,12 @@ const BigTitle: React.FC<IBitTitleProps> = ({ text, top, left, right, bottom }) 
             left={left}
             right={right}
             bottom={bottom}
-            fontSize='calc(5rem + 5vw)'
+            fontSize={fs}
             fontWeight='black'
             color={useColorModeValue('blackAlpha.500', 'whiteAlpha.500')}
             pos='absolute'
         >
-            {text}
+            {t(text)}
         </Text>
     );
 };

@@ -45,7 +45,7 @@ const Skills: React.FC<ISkillsProps> = ({ title, body, skillsLines }) => {
             alignItems='center'
         >
             <BigTitle
-                text='SKILLS'
+                text='big-title-skills'
                 top={useBreakpointValue({ base: '-20px', lg: '0' })}
                 right={useBreakpointValue({ base: '5%', lg: '50%' })}
             />

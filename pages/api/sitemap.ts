@@ -14,14 +14,20 @@ const handler: NextApiHandler = async (req, res) => {
 
     const staticPaths = [
         '',
-        '/blog'
+        '/uk',
+        '/blog',
+        '/uk/blog'
     ].map(
         staticPagePath =>
             `${process.env.NEXT_PUBLIC_BASE_URL}${staticPagePath}`
     );
-    const dynamicPaths = posts.map(
-        post => `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}`
-    );
+    const dynamicPaths = posts.reduce((arr, post) => {
+        return [
+            ...arr,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/uk/blog/${post.slug}`
+        ];
+    }, [] as string[]);
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

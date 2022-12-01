@@ -4,6 +4,16 @@ export interface IPage {
     body: IPortableElement[];
 }
 
+export interface IResume {
+    pdfUrl: string;
+    image: {
+        src: string;
+        width: number;
+        height: number;
+        placeholder: string;
+    }
+}
+
 export interface IPortableElement {
     _key: string;
     _type: string;

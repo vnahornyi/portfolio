@@ -1,22 +1,23 @@
 import { Button, chakra, Flex, Stack, Text } from '@chakra-ui/react';
 import { m, useScroll, useTransform } from 'framer-motion';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
+import { useContext } from 'react';
 
-import ThemePicker from './Header/ThemePicker';
+import { ResumeContext } from 'layouts/MainLayout';
+import LanguagePicker from './LanguagePicker';
 
 const MotionHeader = chakra(m.header);
 
-const Header = () => {
+const Header: React.FC = () => {
+    const resume = useContext(ResumeContext);
+    const { t } = useTranslation('common');
     const { scrollY } = useScroll();
     const backgropBlur = useTransform(
         scrollY,
         [0, 40],
         ['blur(0px) contrast(100%)', 'blur(8px) contrast(90%)']
     );
-
-    const handleOpenResume = () => {
-        window.open('/data/resume.pdf');  
-    };
 
     return (
         <MotionHeader
@@ -45,16 +46,18 @@ const Header = () => {
                     Vladyslav Nahornyi
                 </Text>
                 <Stack spacing={5} direction='row'>
-                    <ThemePicker />
+                    <LanguagePicker />
                     <Button
-                        as={m.button}
+                        as={m.a}
+                        rel='noreferrer noopener'
+                        target='_blank'
+                        href={resume?.pdfUrl}
                         colorScheme='green'
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.8 }}
-                        onClick={handleOpenResume}
                         size={{ base: 'sm', md: 'md' }}
                     >
-                        RESUME
+                        {t('resume-btn')}
                     </Button>
                 </Stack>
             </Flex>

@@ -69,7 +69,7 @@ const About: React.FC<AboutPropsType> = ({ title, body }) => {
             </Stack>
             <JumpingArrow alwaysWhite />
             <BigTitle
-                text='ABOUT'
+                text='big-title-about'
                 bottom={useBreakpointValue({ base: '-20px', lg: '0' })}
                 left={useBreakpointValue({ base: '5%', lg: '50%' })}
             />

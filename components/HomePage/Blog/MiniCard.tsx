@@ -13,8 +13,10 @@ import {
 import NextLink from 'next/link';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import useTranslation from 'next-translate/useTranslation';
 
 import { IPost } from 'types';
+import { POST } from 'constants/routes';
 
 interface IMiniCardProps extends IPost {
     delay?: number;
@@ -26,6 +28,7 @@ const MiniCard: React.FC<IMiniCardProps> = ({
     slug,
     delay,
 }) => {
+    const { t } = useTranslation('common');
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true });
     const customDelay = useBreakpointValue({ base: 0, lg: delay });
@@ -52,11 +55,11 @@ const MiniCard: React.FC<IMiniCardProps> = ({
                     <Text>{description}</Text>
                     <Link
                         as={NextLink}
-                        href={`/blog/${slug}`}
+                        href={POST.replace('[slug]', slug)}
                         color={useColorModeValue('green.400', 'white')}
                         fontWeight='bold'
                     >
-                        Read more...
+                        {t('read-more')}
                     </Link>
                 </Stack>
             </CardBody>
