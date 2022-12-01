@@ -18,11 +18,10 @@ const BlogAuthor: React.FC<IBlogAuthorProps> = ({ date, priority }) => {
                 rounded='full'
                 w='16'
                 h='16'
-                objectFit='cover'
-                objectPosition='center'
                 overflow='hidden'
             >
                 <Image
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     src={resume?.image.src ?? ''}
                     width={resume?.image.width}
                     height={resume?.image.height}

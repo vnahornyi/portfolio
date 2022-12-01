@@ -14,11 +14,10 @@ export const StaticImage: React.FC = () => {
             rounded='full'
             w='full'
             h='full'
-            objectFit='cover'
-            objectPosition='center'
             overflow='hidden'
         >
             <Image
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 width={resume?.image.width}
                 height={resume?.image.height}
                 src={resume?.image.src ?? ''}
