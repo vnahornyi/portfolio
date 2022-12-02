@@ -18,6 +18,7 @@ class MyDocument extends Document {
                         href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap'
                         rel='stylesheet'
                     />
+                    <meta name='freelancehunt' content='e57cecae7f91657' />
                     <link rel='icon' href='/favicon.ico' sizes='any' />
                     <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
                     <link rel='manifest' href='/manifest.webmanifest' />
